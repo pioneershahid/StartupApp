@@ -1,0 +1,45 @@
+<!-- 
+# This is a Jinja2 template for editing a startup's details in a web application.
+# It extends a base HTML template and includes Bootstrap for styling. The form allows the user to update the startup's title, description, and image.
+# The current image is displayed, and the user can choose to upload a new one. The form uses POST method to submit the data.
+The template also includes a button to cancel the edit and return to the dashboard.  -->
+
+
+
+{% extends "base.html" %}
+{% block title %}Edit Startup{% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="text-center">Edit Your Startup</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" name="title" class="form-control" value="{{ startup.title }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea name="description" class="form-control" rows="5" required>{{ startup.description }}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Current Image</label>
+            <div>
+                <img src="{{ url_for('static', filename='uploads/' + startup.image_file) }}" 
+                     alt="Current Image" 
+                     class="img-fluid rounded" 
+                     width="200">
+            </div>
+        </div>
+        
+        <div class="mb-3">
+            <label for="image_file" class="form-label">Upload New Image (Optional)</label>
+            <input type="file" name="image_file" class="form-control">
+        </div>
+        
+
+        <button type="submit" class="btn btn-primary">Update Startup</button>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

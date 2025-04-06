@@ -1,0 +1,24 @@
+<!-- 
+# This is a Jinja2 template for a registration page in a web application.
+# It extends a base HTML template and uses Bootstrap for styling. The form includes fields for username, email, and password, and a submit button.
+The form uses POST method to submit the data. The template also includes a title block and a content block for the main content.  -->
+
+</code>
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<h2 class="text-center">Register</h2>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+        {{ form.username.label }} {{ form.username(class="form-control") }}
+    </div>
+    <div class="mb-3">
+        {{ form.email.label }} {{ form.email(class="form-control") }}
+    </div>
+    <div class="mb-3">
+        {{ form.password.label }} {{ form.password(class="form-control") }}
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+{% endblock %}

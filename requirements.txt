@@ -1,0 +1,13 @@
+# This is a requirements file for a Flask application with SQLAlchemy, Flask-Login, and other dependencies.
+# It includes the necessary libraries for building a web application with user authentication and form handling.
+
+Flask
+Flask-SQLAlchemy
+Flask-Login
+Flask-WTF
+WTForms
+Werkzeug
+python-dotenv
+Flask-Limiter
+MarkupSafe
+Email-Validator

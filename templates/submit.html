@@ -1,0 +1,25 @@
+<!--  explain the code below
+# This is a Jinja2 template for a startup submission page in a web application.
+# It extends a base HTML template and includes Bootstrap for styling. The form allows the user to submit a startup's title, description, and image.
+# The form uses POST method to submit the data. The template also includes a title block and a content block for the main content. -->
+
+{% set form = form %}
+
+{% extends "base.html" %}
+{% block title %}Submit Startup{% endblock %}
+{% block content %}
+<h2 class="text-center">Submit Your Startup</h2>
+<form method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+        {{ form.title.label }} {{ form.title(class="form-control") }}
+    </div>
+    <div class="mb-3">
+        {{ form.description.label }} {{ form.description(class="form-control") }}
+    </div>
+    <div class="mb-3">
+        {{ form.image.label }} {{ form.image(class="form-control") }}
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

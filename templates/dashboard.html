@@ -1,0 +1,32 @@
+<!--  This is the dashboard template for displaying user startups. It extends the base template and includes Bootstrap for styling.  -->
+<!--  The template uses Jinja2 syntax to loop through the startups and conditionally display elements based on the user's authentication status.  -->
+<!--  The template includes a title block, a content block for the main content, and a row layout for displaying the startups in cards.  -->
+
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h2 class="text-center">Your Startups</h2>
+<div class="row">
+    {% for startup in startups %}
+    <div class="col-md-4">
+        <div class="card mt-3">
+            <img src="{{ url_for('static', filename='uploads/' + startup.image_file) }}" class="card-img-top" alt="{{ startup.title }}" width="600" height="300">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">{{ startup.title }}</h5>
+                <p class="card-text">{{ startup.description[:100] }}...</p>
+                
+                <div class="btn-group" role="group" aria-label="Vote">
+                    {% if startup.user_id == current_user.id %}
+                        <a href="{{ url_for('edit_startup', startup_id=startup.id) }}" class="btn btn-warning">Edit</a>
+                    {% endif %}
+                    <button type="button" class="btn btn-secondary" disabled>Votes: {{ startup.votes }}</button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+

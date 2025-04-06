@@ -1,0 +1,45 @@
+<!-- This is a Jinja2 template for a search page in a web application. 
+ It extends a base HTML template and uses Bootstrap for styling. 
+ The form includes an input field for the search query and a submit button. 
+ The template also includes a title block and a content block for the main content. 
+ If there are results from the search, it displays them in a grid format with cards showing the title, description, and votes of each startup. 
+ If no results are found, it displays a message indicating "No Result found".  -->
+
+
+{% extends "base.html" %}
+{% block title %}Search{% endblock %}
+{% block content %}
+<h2 class="text-center">Search Startups</h2>
+
+<form action="{{ url_for('search') }}" method="post" class="d-flex mb-4">
+    <input type="text" name="query" class="form-control me-2" placeholder="Search startups..." required>
+    <button type="submit" class="btn btn-primary">
+        🔍
+    </button>
+</form>
+
+{% if query %}
+    <h3>Results for "{{ query }}"</h3>
+
+    <a href="{{ url_for('home') }}" class="btn btn-secondary mt-3">Back to Home</a>
+    
+    <div class="row">
+        {% if results %}
+
+            {% for startup in results %}
+            <div class="col-md-4">
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ startup.title }}</h5>
+                        <p class="card-text">{{ startup.description[:100] }}...</p>
+                        <p><strong>Votes:</strong> {{ startup.votes }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>No results found.</p>
+        {% endif %}
+    </div>
+{% endif %}
+{% endblock %}
